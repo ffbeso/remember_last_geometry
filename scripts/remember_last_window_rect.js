@@ -26,7 +26,7 @@ catch (e) {
 // Save the rect at shutdown
 function save_rect() {
     var ps1_script = mp.utils.join_path(dir, "Get-Client-Rect.ps1")
-    var output = mp.utils.subprocess({ args: ["powershell", "&(\"" + ps1_script + "\")", mp.utils.getpid()], cancellable: false }).stdout
+    var output = mp.utils.subprocess({ args: ["powershell", ps1_script + " " + mp.utils.getpid()], cancellable: false }).stdout
     mp.utils.write_file("file://" + rect_path, output)
 }
 mp.register_event("shutdown", save_rect)
