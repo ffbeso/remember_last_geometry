@@ -30,7 +30,6 @@ catch (e) {
 function save_rect() {
     var ps1_script = mp.utils.join_path(dir.replace("s/", "-opts/"), scriptName + ".ps1")
     var output = mp.utils.subprocess({ args: ["powershell", ps1_script + " " + mp.utils.getpid()], cancellable: false }).stdout
-    //o.geometry = output
     mp.utils.write_file("file://" + dir.replace("s/", "-opts/") + scriptName + ".conf", "geometry=" + output)
 }
 mp.register_event("shutdown", save_rect)
