@@ -4,11 +4,15 @@ var leftMostScreen = 1
 
 // Some setup used by both reading and writing
 var dir = mp.utils.split_path(mp.get_script_file())[0]
-var rect_path = mp.utils.join_path(dir, "last_window_rect.txt")
+var scriptName = mp.get_script_name()
+
+var o = {geometry : ""}
+var option = mp.options
+option.read_options(o)
 
 // Read last window rect if present
 try {
-    var rect = mp.utils.read_file(rect_path).trim().split(' ')
+    var rect = o.geometry.trim().split(' ')
 
     var x = rect[0]
     var y = rect[1]
@@ -16,7 +20,6 @@ try {
     var height = rect[3]
     mp.set_property("screen", leftMostScreen)
     var geometry = width + "x" + height + "+" + x + "+" + y
-    dump("Set geometry: " + geometry)
     mp.set_property("geometry", geometry)
 }
 catch (e) {
@@ -25,8 +28,9 @@ catch (e) {
 
 // Save the rect at shutdown
 function save_rect() {
-    var ps1_script = mp.utils.join_path(dir, "Get-Client-Rect.ps1")
+    var ps1_script = mp.utils.join_path(dir.replace("s/", "-opts/"), scriptName + ".ps1")
     var output = mp.utils.subprocess({ args: ["powershell", ps1_script + " " + mp.utils.getpid()], cancellable: false }).stdout
-    mp.utils.write_file("file://" + rect_path, output)
+    //o.geometry = output
+    mp.utils.write_file("file://" + dir.replace("s/", "-opts/") + scriptName + ".conf", "geometry=" + output)
 }
 mp.register_event("shutdown", save_rect)
