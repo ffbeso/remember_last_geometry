@@ -1,4 +1,4 @@
-# remember_last_window_rect
+# remember_last_geometry
 mpv script
 
 TheOddler's script modified.
