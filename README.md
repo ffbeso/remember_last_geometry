@@ -1,4 +1,4 @@
-# Windowsでmpvのgeometryを終了時に記憶するスクリプト
+## Windowsでmpvのgeometryを終了時に記憶するスクリプト
 
 Script to remember Geometry settings for mpv on exit.
 
