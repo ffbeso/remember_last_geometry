@@ -1,4 +1,5 @@
 # remember_last_geometry
+## mpvのgeometryを終了時に記憶するスクリプト
 mpv script
 
 TheOddler's script modified.
