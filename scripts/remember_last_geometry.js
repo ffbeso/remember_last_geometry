@@ -1,6 +1,6 @@
 // Sometime the leftmost screen doesn't have id 0
 // not sure yet how to detect this automatically
-var leftMostScreen = 1
+var leftMostScreen = 2
 
 // Some setup used by both reading and writing
 var dir = mp.utils.split_path(mp.get_script_file())[0]
