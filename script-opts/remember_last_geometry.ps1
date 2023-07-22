@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 public class Window {
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
-    public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+    public static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
     public static extern bool ClientToScreen(IntPtr hWnd, ref POINT lpPoint);
@@ -28,7 +28,7 @@ $ClientRect = New-Object RECT
 $Position = New-Object POINT
 $Size = New-Object POINT
 
-[Window]::GetWindowRect($Handle, [ref]$ClientRect) | out-null
+[Window]::GetClientRect($Handle, [ref]$ClientRect) | out-null
 $Position.x = 0 # $ClientRect.Left is always 0
 $Position.y = 0 # $ClientRect.Top
 $Size.x = $ClientRect.Right-$ClientRect.Left
